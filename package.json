@@ -22,9 +22,5 @@
     "node-sass-middleware": "^0.9.8",
     "nodemon": "^1.11.0",
     "pg": "^6.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^1.9.2",
-    "sqlite3": "^3.1.4"
   }
 }
