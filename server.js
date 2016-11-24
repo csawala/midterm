@@ -42,9 +42,7 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/maps", mapsRoutes())
-
-app.use("/api/maps", mapsRoutes())
+app.use("/api/maps", mapsRoutes(knex));
 
 app.use(cookieSession({
   name: 'session',
