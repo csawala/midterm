@@ -2,9 +2,11 @@
 
 const express = require('express');
 const router  = express.Router();
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 
 
-const knex = (knex) => {
+module.exports = (knex) => {
 
  router.get("/", (req, res) => {
    knex
@@ -12,59 +14,38 @@ const knex = (knex) => {
      .from("users")
      .then((results) => {
        res.json(results);
-   });
+     });
+ });
+
+ router.get("/signup", (req, res) => {
+   res.render("signup")
+ });
+
+ router.post("/signup", (req, res) => {
+   if (req.body.email === "" || req.body.password === "") {
+     res.status(400)
+     res.send("Please enter an email and password.");
+  } else {
+    knex('users')
+      .insert({
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password)
+    }, 'id')
+     .then((arrayOfId) => {
+       const id = arrayOfId[0]
+       req.sessions(id)
+       res.redirect("/");
+     })
+     .catch(err => {
+       res.state(400)
+     })
+   }
+ });
+
+
+ router.get("/login", (req, res) => {
+   res.render("login")
  });
 
  return router;
-}
-
-const signup = (knex) => {
-
-router.get("/signup", (req, res) => {
-  res.render("signup")
-})
-return router;
-}
-
-
-
-
-const postSignup = (knex) => {
-
-  router.post("/signup", (req, res) => {
-    knex('users')
-      .insert({
-        username: req.body.email,
-        password: req.body.password
-      })
-      .then(function() {
-        return {inserted: true}
-      })
-      // .catch(() => {
-      //     // need to add promise that username or password can't be empty
-      // })
-      res.redirect("/");
-    })
-
-    return router
-};
-
-
-
-const login = (knex) => {
-
-router.get("/login", (req, res) => {
-  res.render("login")
-})
-
-return router;
-}
-
-
-
-module.exports = {
- knex: knex,
- signup: signup,
- login: login,
- postSignup: postSignup
 }
