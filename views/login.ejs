@@ -6,13 +6,15 @@
 
   <body>
 
-    <form action="/login" method="POST">
+    <form action="/api/users/login" method="POST">
 
       <input type="email" name="email" placeholder="email">
       <input type="password" name="password" placeholder="password">
       <input type="submit" name="submit" value="login">
 
     </form>
+
+    <p>First time here? Please <a href="/api/users/signup">register.</a></p>
 
   </body>
 
