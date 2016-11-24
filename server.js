@@ -40,23 +40,23 @@ app.use("/styles", sass({
 
 app.use(express.static("public"));
 
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
-app.use("/api/maps", mapsRoutes())
-
-app.use("/api/maps", mapsRoutes())
-
 app.use(cookieSession({
   name: 'session',
   keys: ['totally secret stuff']
   }));
+
+// Mount all resource routes
+app.use("/api/users", usersRoutes(knex));
+app.use("/api/maps", mapsRoutes())
+
+
 
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-//Port
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
