@@ -13,6 +13,9 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
+
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -36,10 +39,15 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", usersRoutes.knex(knex));
-app.use("/api/users", usersRoutes.login(knex));
-app.use("/api/users", usersRoutes.signup(knex));
-app.use("/api/users", usersRoutes.postSignup(knex));
+app.use("/api/users", usersRoutes(knex));
+// app.use("/api/users", usersRoutes.login(knex));
+// app.use("/api/users", usersRoutes.signup(knex));
+// app.use("/api/users", usersRoutes.postSignup(knex));
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['totally secret stuff']
+  }));
 
 // Home page
 app.get("/", (req, res) => {
