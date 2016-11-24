@@ -3,6 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
+
 const knex = (knex) => {
 
  router.get("/", (req, res) => {
@@ -17,6 +18,53 @@ const knex = (knex) => {
  return router;
 }
 
+const signup = (knex) => {
+
+router.get("/signup", (req, res) => {
+  res.render("signup")
+})
+return router;
+}
+
+
+
+
+const postSignup = (knex) => {
+
+  router.post("/signup", (req, res) => {
+    knex('users')
+      .insert({
+        username: req.body.email,
+        password: req.body.password
+      })
+      .then(function() {
+        return {inserted: true}
+      })
+      // .catch(() => {
+      //     // need to add promise that username or password can't be empty
+      // })
+      res.redirect("/");
+    })
+
+    return router
+};
+
+
+
+const login = (knex) => {
+
+router.get("/login", (req, res) => {
+  res.render("login")
+})
+
+return router;
+}
+
+
+
 module.exports = {
- knex: knex
+ knex: knex,
+ signup: signup,
+ login: login,
+ postSignup: postSignup
 }
