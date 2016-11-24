@@ -44,11 +44,12 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes())
 
+app.use("/api/maps", mapsRoutes())
+
 app.use(cookieSession({
   name: 'session',
   keys: ['totally secret stuff']
   }));
-
 
 // Home page
 app.get("/", (req, res) => {
