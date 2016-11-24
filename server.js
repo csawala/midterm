@@ -42,19 +42,13 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
-<<<<<<< HEAD
-app.use("/api/maps", mapsRoutes())
 
-=======
-// app.use("/api/users", usersRoutes.login(knex));
-// app.use("/api/users", usersRoutes.signup(knex));
-// app.use("/api/users", usersRoutes.postSignup(knex));
+app.use("/api/maps", mapsRoutes())
 
 app.use(cookieSession({
   name: 'session',
   keys: ['totally secret stuff']
   }));
->>>>>>> 910cfd418c4ccf531dafcf6e5f202aaac11e2bdb
 
 // Home page
 app.get("/", (req, res) => {
