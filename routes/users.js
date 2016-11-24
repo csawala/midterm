@@ -10,14 +10,14 @@ const bcrypt = require('bcrypt');
 
 module.exports = (knex) => {
 
-router.get("/", (req, res) => {
-  knex
-    .select("*")
-    .from("users")
-    .then((results) => {
-      res.json(results);
-    });
-});
+// router.get("/", (req, res) => {
+//   knex
+//     .select("*")
+//     .from("users")
+//     .then((results) => {
+//       res.json(results);
+//     });
+// });
 
 router.get("/signup", (req, res) => {
   res.render("signup")
@@ -48,6 +48,36 @@ router.post("/signup", (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login")
 });
+
+
+router.post("/login", (req, res) => {
+
+  knex('users')
+  .select('email', 'password')
+  .where('email', req.body.email)
+  .then((info) => {
+    if (info.length === 0) {
+    res.status(400)
+    res.send("Please enter an email.");
+    res.redirect("/");
+    } else if (bcrypt.compareSync(req.body.password, info[0].password)) {
+    knex('users')
+    .select('id')
+    .where('email', req.body.email)
+    .then( (arrayOfId) => {
+      const userId = arrayOfId[0]
+      console.log(arrayOfId[0]);
+      req.session.id = userId
+      res.redirect("/");
+      })
+    } else {
+      res.status(400)
+      res.send("Did you forget your password?")
+      res.redirect("/");
+    }
+  });
+});
+
 
 return router;
 }

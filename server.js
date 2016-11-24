@@ -40,15 +40,17 @@ app.use("/styles", sass({
 
 app.use(express.static("public"));
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['totally secret stuff']
+  }));
+
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes())
 
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['totally secret stuff']
-  }));
+
 
 
 // Home page
