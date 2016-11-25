@@ -1,28 +1,30 @@
-
+<!--
 <form action="/api/users/login" method="POST">
 
   <input type="email" name="email" placeholder="email">
   <input type="password" name="password" placeholder="password">
   <input type="submit" name="submit" value="login">
 
-</form>
+</form> -->
 
+<div class="wrapper">
+   <img class="img-responsive" src="/images/mapsLogin.jpg" alt="mapsImage">
+</div>
 
-<form class="form-inline">
+<form class="form-inline" id="loginForm">
   <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+    <label class="sr-only" for="email">Email address</label>
+    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
   </div>
   <div class="form-group">
-    <label class="sr-only" for="exampleInputPassword3">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+    <label class="sr-only" for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
   </div>
-  <div class="form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
+  <div class="text">
+    <label class="text">
+      <p>First time here? Please <a href="/api/users/signup">register.</a></p>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <div class="button">
+  <button id="signInButton" type="submit" class="btn btn-primary">Sign in</button>
+</div>
 </form>
-
-<p>First time here? Please <a href="/api/users/signup">register.</a></p>
