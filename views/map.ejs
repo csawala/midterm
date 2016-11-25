@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geocoding service</title>
+    <title>Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" href="/styles/map.css" type="text/css"/>
@@ -9,11 +9,22 @@
     <script type="text/javascript" src="/scripts/map.js"></script>
   </head>
   <body>
-    <div id="floating-panel">
+    <div id="get-to-address">
+      <input id="location" type="textbox" value="">
+      <input id="locate" type="button" value="Get me there!">
+    </div>
+    <!-- <div id="floating-panel">
       <input id="address" type="textbox" value="Sydney, NSW">
       <input id="submit" type="button" value="Geocode">
-    </div>
+    </div> -->
     <div id="map"></div>
+    <div class="marker-form">
+      <form method="POST" action="/marker">
+        <input type="textbox" value="Description">
+        <input type="textbox" value="Name">
+        <button class="button">SAVE</button>
+      </form>
+    </div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=`${MAP_API}`%>&callback=initMap"></script>
   </body>
 </html>
