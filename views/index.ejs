@@ -1,86 +1,50 @@
-<nav id="nav-bar">
-  <img class="logo" src="/images/JAGmaps.png">
-  <h1 class="navBarUsername"></h1>
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">
+			Pusat Ilmu Secara Detil</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li class="clr1 active"><a href="index.html">Home</a></li>
+				<li class="clr2"><a href="about.html">Programming</a></li>
+				<li class="clr3"><a href="courses.html">English</a></li>
+				<li class="clr4 dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
+						<ul class="dropdown-menu" style="padding: 20px 10px 5px 10px; width:300px;">
+							<li>
+								<form>
+									<div class="form-group">
+										<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+									</div>
+									<div class="checkbox">
+										<label><input type="checkbox"> Remember me</label>
+									</div>
+									<button type="submit" class="btn btn-primary">Login</button>
+								</form>
+							</li>
+						</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-<div class = "dropDown">
-    <ul class="nav navbar-nav navbar-right">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><button>Login</button> <span class="caret"></span></a>
-      <ul id="login-dp" class="dropdown-menu">
-        <form id="login" action="/login" method="POST">
-          <label for="login"></label>
-          <input id="email" type="text" name="email" class="form-control" placeholder="Enter your email" style="width: 200px">
-          <label for="password"></label>
-          <input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" style="width: 200px">
-          <button type="submit">Login</button></form>
-          Not a member? Create Account Here
-        <form id="register" action="/register" method="POST">
-            <label for="register"></label>
-            <input type="text" name="email" class="form-control" placeholder="Enter your email" style="width: 200px">
-            <label for="password"></label>
-            <input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" style="width: 200px">
-            <button id="register-button" type="submit">Register</button></input>
-          </form>
-      </ul>
-    </ul>
-  </div>
-
-  <!-- While logged in -->
-  <span id="user-name"></span>
-
-    <!-- New Map -->
-    <form id="new-map" action="/new" method="POST">
-      <label for="new"></label>
-      <input id="map_id" type="text" name="map_id" placeholder="Map Name" style="width: 150px">
-      <button id="create" type="button">Create</button>
-    </form>
-
-
-    <!-- Logout -->
+	<!-- /.navbar -->
+<div class="navbar navbar-default navbar-fixed-bottom">
+   <div class="container">
+      <p class="navbar-text pull-left">Maps With Friends <a href="http://ilmu-detil.blogspot.co.id/">Pusat Ilmu Secara Detil</a></p>
+   </div>
+   <div>
+     <!-- Logout -->
     <button type="button" id="logout-button" onClick="window.location.reload()">
       Logout
-    </button>
-</nav>
-
-<!-- Sidebar -->
-<container id="side-bar">
-  <button type="button" class="toggleSide">-</button>
-  <div class="sideBar">
-    <section id="explore">
-      <button type="button" id="exploreButton" class="sideButton">Explore </button>
-      <div id="exploreCont">
-      </div>
-    </section>
-    <section id="my-maps">
-      <button type="button" id="myMapsButton" class="sideButton">My Maps</button></br>
-      <div id="myMapsCont">
-      </div>
-    </section>
-    <section id="my-favs">
-      <button type="button" id="myFavsButton" class="sideButton">Favourites </button></br>
-      <div id="myFavsCont">
-      </div>
-    </section>
-    <section id="all-maps">
-      <button type="button" id="allMapsButton" class="sideButton">All Maps </button></br>
-      <div id="allMapsCont">
-      </div>
-    </section>
-    <section id="contributions">
-      <button type="button" id="contributionsButton" class="sideButton">Contributions </button></br>
-      <div id="contributionsCont">
-      </div>
-    </section>
-  </div>
-</container>
-
-<!-- Map -->
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="map">
+    </button></div>
 </div>
-</body>
-<!-- 4aea7cde3d1dfbb527d954c14f1604effadd810a -->
-
-</html>
