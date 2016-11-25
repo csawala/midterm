@@ -8,6 +8,8 @@ const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
+const expressLayouts = require('express-ejs-layouts');
+
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -15,6 +17,7 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
+
 
 
 // Seperated Routes for each Resource
@@ -30,6 +33,8 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set('layout', 'layouts/layout');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
