@@ -6,6 +6,8 @@ body {
   }
 }
 
+// CSS for login.ejs
+
 #loginForm {
   position: fixed;
   top: 50%;
@@ -14,11 +16,24 @@ body {
   margin-left: -100px;
 }
 
-.button {
+// CSS for signup.ejs
+
+.signInButton {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+// CSS for signup.ejs
+
+.signUpButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+// CSS for singup.ejs
 
 .text {
   display: flex;
@@ -34,6 +49,19 @@ body {
   color: white;
   font-size: 400%;
 }
+
+
+// CSS for index.js
+
+
+// navbar bottom (logout)
+
+#logoutButton {
+  margin-left: 6em;
+}
+
+
+// navbar top (menu)
 
 .navbar-default .navbar-nav > li.clr1 a{
 		color:#ffffff;
@@ -71,9 +99,11 @@ body {
 		color: #ffffff;
 		font-weight:bold;
 	}
+  
 	.navbar-default .navbar-text {
 		color:#ffffff;
     }
+
 	a{
 		color: #FFC107;
 		text-decoration: none;
