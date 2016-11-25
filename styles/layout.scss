@@ -5,3 +5,24 @@ body {
     color: #244751;
   }
 }
+
+#loginForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
