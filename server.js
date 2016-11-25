@@ -8,6 +8,8 @@ const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
+const expressLayouts = require('express-ejs-layouts');
+
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -17,8 +19,10 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
 
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+const mapsRoutes = require("./routes/maps");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -29,6 +33,8 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set('layout', 'layouts/layout');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -36,23 +42,25 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
 
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
-// app.use("/api/users", usersRoutes.login(knex));
-// app.use("/api/users", usersRoutes.signup(knex));
-// app.use("/api/users", usersRoutes.postSignup(knex));
+app.use(express.static("public"));
 
 app.use(cookieSession({
   name: 'session',
   keys: ['totally secret stuff']
   }));
 
+// Mount all resource routes
+app.use("/api/users", usersRoutes(knex));
+app.use("/api/maps", mapsRoutes())
+
+
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
