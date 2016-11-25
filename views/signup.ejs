@@ -1,19 +1,34 @@
-<html lang="en">
+    <div class="wrapper">
+       <img class="img-responsive" src="/images/mapsSignUp.jpg" alt="mapsImage">
+    </div>
 
-  <head>
-    <title>Login form</title>
-  </head>
 
-  <body>
-
-    <form action="/api/users/signup" method="POST">
-
-      <input type="email" name="email" placeholder="email">
-      <input type="password" name="password" placeholder="password">
-      <input type="submit" name="submit" value="SignUp">
+    <form class="form-inline" id="loginForm" action="/api/users/signup" method="POST">
+      <div class="text">
+        <label class="text" id="SignUpText">
+          <p>Welcome!</a></p>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="email">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <div class="text">
+        <label class="text">
+      </div>
+      <div class="signUpButton">
+      <button type="submit" name="submit" class="btn btn-primary">Sign up</button>
+    </div>
+    <br>
+    <% if (typeof(errorMsg) !== 'undefined') { %>
+      <div class="alert alert-danger" id="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <%= errorMsg %>
+      </div>
+    <% } %>
 
     </form>
-
-  </body>
-
-</html>
