@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (knex) => {
+module.exports = () => {
 
   router.get("/", (req, res) => {
     const templateVars = { MAP_API: process.env.MAP_API }
@@ -11,11 +11,18 @@ module.exports = (knex) => {
   });
 
   router.post("/map", (req, res) => {
-    const position = req.body
-    knex.insert("position")
-    //code here
+      // knex("positions")
+      //   .insert({
+      //     posiiton: body
+      //   })
+      })
 
+  router.get("/mapbox", (req, res) => {
+    const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
+      MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
+    res.render("mapbox", templateVars)
   })
+
 
   return router;
 }
