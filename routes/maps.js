@@ -11,6 +11,7 @@ module.exports = (knex) => {
   const st = require('knex-postgis')(knex)
 
   router.get("/", (req, res) => {
+    console.log(req.query)
     const templateVars = { MAP_API: process.env.MAP_API }
     res.render("map", templateVars)
   });
