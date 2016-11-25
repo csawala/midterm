@@ -1,10 +1,4 @@
-<html lang="en">
-
-  <head>
-    <title>Login form</title>
-  </head>
-
-  <body>
+<!--
 
     <form action="/api/users/signup" method="POST">
 
@@ -12,8 +6,31 @@
       <input type="password" name="password" placeholder="password">
       <input type="submit" name="submit" value="SignUp">
 
+    </form> -->
+
+
+    <div class="wrapper">
+       <img class="img-responsive" src="/images/mapsLogin.jpg" alt="mapsImage">
+    </div>
+
+
+    <form class="form-inline" id="loginForm" action="/api/users/signup" method="POST">
+      <div class="text">
+        <label class="text" id="SignUpText">
+          <p>Welcome!</a></p>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="email">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <div class="text">
+        <label class="text">
+      </div>
+      <div class="button">
+      <button id="signInButton" type="submit" name="submit" class="btn btn-primary">Sign up</button>
+    </div>
     </form>
-
-  </body>
-
-</html>

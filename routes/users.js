@@ -10,14 +10,14 @@ const bcrypt = require('bcrypt');
 
 module.exports = (knex) => {
 
-// router.get("/", (req, res) => {
-//   knex
-//     .select("*")
-//     .from("users")
-//     .then((results) => {
-//       res.json(results);
-//     });
-// });
+router.get("/", (req, res) => {
+  knex
+    .select("*")
+    .from("users")
+    .then((results) => {
+      res.json(results);
+    });
+});
 
 router.get("/signup", (req, res) => {
   res.render("signup")
