@@ -1,6 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('points', function (table) {
-    table.specificType('loc', 'point');
+    table.integer('mapid');
+    table.specificType('loc', 'geometry(point, 4326)');
     table.string('title');
     table.string('info');
     table.integer('createdby');
@@ -14,5 +15,5 @@ exports.down = function(knex, Promise) {
 
 
 
-
-  // table.specificType('point', 'geometry(point, 4326)');
+// ORIGINAL CODE FROM NET FOR CREATING POINT
+// table.specificType('point', 'geometry(point, 4326)');
