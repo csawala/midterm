@@ -19,8 +19,8 @@
 					<a class="dropdown-toggle" data-toggle="dropdown">Create a map<span class="caret"></span></a>
 						<ul class="dropdown-menu" style="padding: 20px 10px 5px 10px; width:300px;">
 							<li>
-								<form>
-									<div class="form-group">
+								<form id="createNewMapForm" action="api/maps">
+									<div class="form-group" >
                     <label for="title">Map title:</label>
 										<input type="text" name="title" class="form-control" id="inputTitle" placeholder="title">
 									</div>
@@ -30,7 +30,7 @@
                   </div>
 									<div class="form-group">
                     <label for="description">Description:</label>
-										<input type="text" class="form-control" id="inputDescription" placeholder="description">
+										<input type="text" name="description" class="form-control" id="inputDescription" placeholder="description">
 									</div>
 									<button type="submit" class="btn btn-primary">Create</button>
 								</form>
@@ -61,3 +61,23 @@
   </div>
 
   </form>
+ <!-- create onclick function that takes info entered into form and submits it to /api/maps -->
+
+  <script>
+
+  $("#createNewMapForm").submit(function(event){
+    event.preventDefault();
+    var newMapForm = $("#createNewMapForm").serialize()
+    window.location = "/api/maps?" + newMapForm;
+});
+
+
+
+// $("#mapFormInput :input").each(function(index) {
+//     $(this).on("click", function(){
+//       var parameter = $(this).val();
+//       window.location = "/api/maps" + parameter;
+//     });
+// });
+
+  </script>

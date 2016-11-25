@@ -80,7 +80,7 @@ router.post("/login", (req, res) => {
 
 // Request for logout
 
-router.post("/", (req, res) => {
+router.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/api/users/login");
 });
