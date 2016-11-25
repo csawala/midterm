@@ -52,7 +52,7 @@ app.use(cookieSession({
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
-app.use("/api/maps", mapsRoutes());
+app.use("/api/maps", mapsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {

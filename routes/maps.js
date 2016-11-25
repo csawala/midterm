@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = () => {
+module.exports = (knex) => {
 
   router.get("/", (req, res) => {
     const templateVars = { MAP_API: process.env.MAP_API }
