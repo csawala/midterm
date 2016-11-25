@@ -1,1 +1,83 @@
-<h1>Hello World!</h1>
+
+<!-- top nav menu -->
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">
+			Maps With Friends</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li class="clr1 active"><a href="index.html">Favourite Maps</a></li>
+				<li class="clr2"><a href="about.html">Contributed Maps</a></li>
+				<li class="clr3"><a href="courses.html">All My Maps</a></li>
+				<li class="clr4 dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Create a map<span class="caret"></span></a>
+						<ul class="dropdown-menu" style="padding: 20px 10px 5px 10px; width:300px;">
+							<li>
+								<form id="createNewMapForm" action="api/maps">
+									<div class="form-group" >
+                    <label for="title">Map title:</label>
+										<input type="text" name="title" class="form-control" id="inputTitle" placeholder="title">
+									</div>
+                  <div class="form-group">
+                    <label for="title">City:</label>
+                    <input type="text" name="location" class="form-control" id="location" placeholder="title">
+                  </div>
+									<div class="form-group">
+                    <label for="description">Description:</label>
+										<input type="text" name="description" class="form-control" id="inputDescription" placeholder="description">
+									</div>
+									<button type="submit" class="btn btn-primary">Create</button>
+								</form>
+							</li>
+						</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<!-- have the div in map.ejs render here -->
+
+
+	<!-- /.navbar -->
+<div class="navbar navbar-default navbar-fixed-bottom">
+   <div class="container">
+      <p class="navbar-text pull-left">Maps With Friends</p>
+   </div>
+
+
+
+	<!-- Logout -->
+  <form action="/api/users" class="form-inline" method="POST">
+    <div class="button">
+    <button id="logoutButton" type="submit" class="btn btn-primary">Logout</button>
+  </div>
+
+  </form>
+ <!-- create onclick function that takes info entered into form and submits it to /api/maps -->
+
+  <script>
+
+  $("#createNewMapForm").submit(function(event){
+    event.preventDefault();
+    var newMapForm = $("#createNewMapForm").serialize()
+    window.location = "/api/maps?" + newMapForm;
+});
+
+
+
+// $("#mapFormInput :input").each(function(index) {
+//     $(this).on("click", function(){
+//       var parameter = $(this).val();
+//       window.location = "/api/maps" + parameter;
+//     });
+// });
+
+  </script>

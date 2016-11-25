@@ -1,17 +1,12 @@
-<!--
-<form action="/api/users/login" method="POST">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-  <input type="email" name="email" placeholder="email">
-  <input type="password" name="password" placeholder="password">
-  <input type="submit" name="submit" value="login">
-
-</form> -->
 
 <div class="wrapper">
    <img class="img-responsive" src="/images/mapsLogin.jpg" alt="mapsImage">
-</div>
 
-<form class="form-inline" id="loginForm">
+
+<form action="login" class="form-inline" id="loginForm" method="POST">
+
   <div class="form-group">
     <label class="sr-only" for="email">Email address</label>
     <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
@@ -24,7 +19,27 @@
     <label class="text">
       <p>First time here? Please <a href="/api/users/signup">register.</a></p>
   </div>
-  <div class="button">
-  <button id="signInButton" type="submit" class="btn btn-primary">Sign in</button>
+  <div class="signInButton">
+  <button type="submit" class="btn btn-primary">Sign in</button>
 </div>
+<br>
+<% if (typeof(errorMsg) !== 'undefined') { %>
+  <div class="alert alert-danger" id="alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <%= errorMsg %>
+  </div>
+<% } %>
+
 </form>
+
+</div>
+
+
+<script>
+
+ $(document).ready(function() {
+   $('#alert-danger').fadeIn().delay(3000).fadeOut();
+ });
+
+</script>
