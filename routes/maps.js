@@ -20,22 +20,42 @@ module.exports = (knex) => {
   });
 
   router.post("/map", (req, res) => {
-    console.log("body: ", req.body)
+    // console.log("body: ", req.body)
     let data = {
       coordX: Number(req.body.pointX),
       coordY: Number(req.body.pointY),
       mapid: 3,
       createdby: 3,
-      title: 'Clean Git',
-      info: 'description from clean git',
-      image: 'http://aruizca.com/content/images/git-clean.png'
+      title: 'test3',
+      info: 'test3 description',
+      image: 'testy test image'
     }
+    // console.log(data)
 
+    // table.writeToPoints(data)
+    // let pointSelect = table.readFromPoints()
+    // console.log(pointSelect)
 
-    table.writeToPoints(data)
-    let dataPull = table.readFromPoints()
+    // let userSelect = table.readFromTable('users')
 
-    console.log(dataPull)
+    // knex.select('*').from('users')
+    // .then((info) => {
+    //   userSelect = {
+    //     id: info[0].id,
+    //     email: info[0].email,
+    //     password: info[0].password
+    //   }
+    //   console.log(info[0].email)
+    // })
+
+    // console.log(userSelect)
+    let mapSelect
+    Promise.all(table.readFromTable('maps')).then((values) => {
+      mapSelect = values
+      console.log("after function values: ", values)
+      console.log("mapSelect: ", mapSelect)
+    })
+    // console.log(mapSelect)
 
     // knex.insert({
     //   mapid: 2,
