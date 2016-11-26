@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 module.exports = (knex) => {
-  const st = require('knex-postgis')(knex)
+  const st = require('knex-postgis')(knex)      // ALLOWS FOR postGIS CALCULATIONS
 
   router.get("/", (req, res) => {
     console.log(req.query)
@@ -19,56 +19,36 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
-  router.post("/map", (req, res) => {
-    // console.log("body: ", req.body)
-    let data = {
-      coordX: Number(req.body.pointX),
-      coordY: Number(req.body.pointY),
-      mapid: 3,
-      createdby: 3,
-      title: 'test3',
-      info: 'test3 description',
-      image: 'testy test image'
-    }
-    // console.log(data)
 
-    // table.writeToPoints(data)
-    // let pointSelect = table.readFromPoints()
-    // console.log(pointSelect)
-
-    // let userSelect = table.readFromTable('users')
-
-    // knex.select('*').from('users')
-    // .then((info) => {
-    //   userSelect = {
-    //     id: info[0].id,
-    //     email: info[0].email,
-    //     password: info[0].password
-    //   }
-    //   console.log(info[0].email)
-    // })
-
-    // console.log(userSelect)
-    let mapSelect
-    Promise.all(table.readFromTable('maps')).then((values) => {
-      mapSelect = values
-      console.log("after function values: ", values)
-      console.log("mapSelect: ", mapSelect)
+  router.get("/markers", (req, res) => {
+    knex.select('*', st.asText('loc')).from('points')
+    .then((results) => {
+      res.json(results)
     })
-    // console.log(mapSelect)
+  })
 
-    // knex.insert({
-    //   mapid: 2,
-    //   loc: st.geomFromText(`Point(${coordX} ${coordY})`, 4326),
-    //   title: 'testing title',
-    //   info: 'testing description',
-    //   createdby: 2,
-    //   image: 'http://www.img.com'
-    // }).into('points')
-    // .then(() => {
+  //This is the post that receive the marker object. It only console
+  //logs for now, we need to add to database.
+  router.post("/marker", (req, res) => {
+    res.status(200)
+    let data = req.body
+    let output
+
+    knex.insert({
+      mapid: data.mapid,
+      loc: st.geomFromText(`Point(${Number(data.lat)} ${Number(data.lng)})`, 4326),
+      title: data.title,
+      info: data.description,
+      createdby: data.userid,
+      image: data.image
+    }).into('points')
+    // .then(() => {        // this will display POINT info from database
     //   knex.select('*', st.asText('loc')).from('points')
-    //   .then((event) => {
-    //     console.log(event)
+    //   .then((results) => {
+    //     output = results
+    //   })
+    //   .then(() => {
+    //     console.log("points print: ", output)
     //   })
     // })
   })
@@ -78,7 +58,6 @@ module.exports = (knex) => {
       MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
     res.render("mapbox", templateVars)
   })
-
 
   return router;
 }

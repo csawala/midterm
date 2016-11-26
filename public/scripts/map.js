@@ -47,7 +47,7 @@ function initMap() {
   //   }
   //   description: "sdfsdf sdfs dsd fsd fsd f"
   // }
-
+const onClickMarker = () => {
   google.maps.event.addListener(map, 'click', function(event) {
     // map.setCenter(event.latLng)
 
@@ -55,13 +55,12 @@ function initMap() {
     let latitude = event.latLng.lat();
 
     function addMarker(location) {
-      let marker = new google.maps.Marker({
+      let tempMarker = new google.maps.Marker({
           position: location,
           map: map
         });
-      console.log(marker)
       console.log("location:", location)
-      tempMarkers.push(marker);
+      tempMarkers.push(tempMarker);
     }
     function setMapOnAll(map) {
       for (var i = 0; i < tempMarkers.length; i++) {
@@ -83,11 +82,20 @@ function initMap() {
 
     getAddress(latitude, longitude, function(address) {
       console.log(address)
-      $(".panel-body .form-group input").val(address)
+      $("#latitude").val(latitude)
+      $("#longitude").val(longitude)
+      $("#address").val(address)
+
     })
 
     markerWindow(tempMarkers)
   })
+}
+
+onClickMarker()
+
+
+
 
   // const markerForm = (map) => {
 
@@ -138,38 +146,70 @@ function initMap() {
 //     placeMarker(event.latLng);
 // });
 }
-function getToAddress(geocoder, resultsMap) {
-  var address = $('#location').val();
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-    }
-  })
-}
 
-function geocodeAddress(geocoder, resultsMap) {
-  var address = $('#address').val();
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-      // var marker = new google.maps.Marker({
-      //   map: resultsMap,
-      //   position: results[0].geometry.location
-      // });
-      const coordinates = { lat: results[0].geometry.location.lat(),
-        lng: results[0].geometry.location.lng()}
-      $.ajax({
-        url: "/api/maps/map",
+///beyond this point, everything is out of the mapinit functio//
+
+const saveMarker = () => {
+  $("#save-form").on('submit', function(event) {
+    event.preventDefault()
+
+    const lat = $("#latitude").val()
+    const lng = $("#longitude").val()
+    const title = $("#title").val()
+    const description = $("#description").val()
+
+    const marker = {lat, lng, title, description}
+    console.log("that's the marker:", marker)
+
+    $.ajax({
+        url: "/api/maps/marker",
         method: "POST",
-        data: coordinates,
+        data: marker,
         success: () => {
           console.log("Ajax came thru")},
         error: (err) => {
           console.log("this is the error:", err)
         }
       })
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+  })
 }
+
+$(()=>{
+saveMarker()
+})
+
+// function getToAddress(geocoder, resultsMap) {
+//   var address = $('#location').val();
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === 'OK') {
+//       resultsMap.setCenter(results[0].geometry.location);
+//     }
+//   })
+// }
+
+// function geocodeAddress(geocoder, resultsMap) {
+//   var address = $('#address').val();
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === 'OK') {
+//       resultsMap.setCenter(results[0].geometry.location);
+//       // var marker = new google.maps.Marker({
+//       //   map: resultsMap,
+//       //   position: results[0].geometry.location
+//       // });
+//       const coordinates = { lat: results[0].geometry.location.lat(),
+//         lng: results[0].geometry.location.lng()}
+//       $.ajax({
+//         url: "/api/maps/map",
+//         method: "POST",
+//         data: coordinates,
+//         success: () => {
+//           console.log("Ajax came thru")},
+//         error: (err) => {
+//           console.log("this is the error:", err)
+//         }
+//       })
+//     } else {
+//       alert('Geocode was not successful for the following reason: ' + status);
+//     }
+//   });
+// }

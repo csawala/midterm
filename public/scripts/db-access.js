@@ -10,16 +10,18 @@ const st          = require('knex-postgis')(knex)
 module.exports = {
   writeToPoints: function(data) {
     knex.insert({
-      mapid: data.mapid,
-      loc: st.geomFromText(`Point(${data.coordX} ${data.coordY})`, 4326),
+      mapid: 4,
+      loc: st.geomFromText(`Point(${Number(data.lat)} ${Number(data.lng)})`, 4326),
       title: data.title,
-      info: data.info,
-      createdby: data.createdby,
-      image: data.image
-    }).into('points').then(() => {
+      info: data.description,
+      createdby: 4,
+      image: ''
+    }).into('points')
+    .then(() => {
       knex.select('*', st.asText('loc')).from('points')
       .then((output) => {
-        console.log(output)
+        console.log("writeToPoints: ", output)
+        return output
       })
     })
   },
@@ -27,7 +29,6 @@ module.exports = {
   readFromPoints: function() {
     knex.select('*', st.asText('loc')).from('points')
     .then((data) => {
-      console.log(data)
       return data
     })
   },
