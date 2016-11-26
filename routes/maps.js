@@ -11,8 +11,11 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
-  router.post("/map", (req, res) => {
-      // knex("positions")
+  router.post("/marker", (req, res) => {
+    console.log("gotcha")
+    res.status(200)
+
+
       //   .insert({
       //     posiiton: body
       //   })
@@ -23,7 +26,6 @@ module.exports = (knex) => {
       MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
     res.render("mapbox", templateVars)
   })
-
 
   return router;
 }

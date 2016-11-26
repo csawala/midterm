@@ -29,16 +29,21 @@
             <h3 class="panel-title">Enter marker information</h3>
         </div>
           <div class="panel-body">
-            <form accept-charset="UTF-8" role="form">
-                    <fieldset>
+            <form accept-charset="UTF-8" role="form" id="save-form">
+              <fieldset>
                     <div class="form-group">
-                  <input class="form-control" placeholder="Address" name="address" type="text">
+                  <input class="form-control" id="latitude" placeholder="Latitude" name="latitude" type="text">
+              </div>
+                    <div class="form-group">
+                  <input class="form-control" id="longitude" placeholder="Longitude" name="longitude" type="text">
+              </div>      <div class="form-group">
+                  <input class="form-control" id="address" placeholder="Address" name="address" type="text">
               </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="E-mail" name="email" type="text">
+                  <input class="form-control" placeholder="Title" name="title" id="title" type="text">
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                <input class="form-control" placeholder="Description" name="password" id ="description" type="text">
               </div>
               <div class="checkbox">
                   <label>
