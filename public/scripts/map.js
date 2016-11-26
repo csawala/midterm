@@ -174,23 +174,26 @@ const saveMarker = () => {
 const getMarkers = () => {
   $.get("/api/maps/markers", function(data) {
     console.log("get request made")
-    //clearMarkers
+    clearUserMarkers()
+    buildUserMarkers(data)
+    setUserMarkers(map)
     //renderMarkers
     console.log("this is the data from get request:", data)
   })
 }
 
 const buildUserMarkers = (rawMarkersData) => {
-  rawMarkersData.forEach(function(markerData){
-    const location = new google.maps.LatLng({lat: "?", lng: "?"})
-    const title = "?"
+  rawMarkersData.forEach(function(markerData) {
+    console.log("markerData:", markerData)
+    const location = new google.maps.LatLng({lat: Number(markerData.lat), lng: Number(markerData.lng)})
+    const title = markerData.title
     //description should probably only be used in the window info
     let userMarker = new google.maps.Marker({
           position: location,
           map: map,
-          title:
+          title: title
         });
-      tempMarkers.push(userMarker);
+      userMarkers.push(userMarker);
   })
 }
 
@@ -200,10 +203,12 @@ const setUserMarkers = (map) => {
   })
 }
 
-const clearUserMarkers = (map) => {
+const clearUserMarkers = () => {
    setUserMarkers(null);
 }
+
 saveMarker()
+setUserMarkers()
 }
 
 
