@@ -19,6 +19,16 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
+
+  router.get("/view/:title/:info", (req, res) => {
+    const tempateVars = {
+      MAP_API: process.env.MAP_API,
+      title: req.params.title,
+      info: req.params.info
+    }
+    res.render("map", templateVars)
+  })
+
   router.get("/markers", (req, res) => {
     knex.select('*', st.asText('loc')).from('points')
     .then((results) => {
@@ -53,15 +63,25 @@ module.exports = (knex) => {
     // })
   })
 
-  router.get("/markers", (req, res) => {
-    res.json(marker)
-  });
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
       MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
     res.render("mapbox", templateVars)
   })
+
+
+  router.post("/mapInfo", (req, res) => {
+    console.log(req.body);
+    knex('maps')
+    .insert({
+    title: req.body.title,
+    info: req.body.info
+    })
+    .then(() => {
+    })
+  res.redirect("/api/maps")
+})
 
   return router;
 }

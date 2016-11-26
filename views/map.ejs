@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/map.js"></script>
     <!-- <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script> -->
-    <!-- <script type="text/javascript" src="/scripts/marker-form.js"></script>> -->
+    <!-- <script type="text/javascript" src="/scripts/marker-form.js"></script> -->
 
   </head>
   <body>
@@ -31,7 +31,13 @@
           <div class="panel-body">
             <form accept-charset="UTF-8" role="form" id="save-form">
               <fieldset>
-                    <div class="form-group">
+                <div class="form-group">
+                  <input class="form-control" placeholder="mapInfo" name="title" type="text" value="<%= templateVars.title %>">
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="mapInfo" name="info" type="text" value="<%= templateVars.info %>">
+              </div>
+                <div class="form-group">
                   <input class="form-control" id="latitude" placeholder="Latitude" name="latitude" type="text">
               </div>
                     <div class="form-group">
