@@ -11,11 +11,11 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
-  router.get("/view/:title/:description", (req, res) => {
+  router.get("/view/:title/:info", (req, res) => {
     const tempateVars = {
       MAP_API: process.env.MAP_API,
       title: req.params.title,
-      description: req.params.description
+      info: req.params.info
     }
     res.render("map", templateVars)
   })
