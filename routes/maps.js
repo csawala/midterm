@@ -1,9 +1,17 @@
 "use strict";
 
-const express = require('express');
-const router  = express.Router();
+const express = require('express')
+const router  = express.Router()
+const bodyParser  = require("body-parser")
+const app = express()
+const table = require('../public/scripts/db-access')
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
 
 module.exports = (knex) => {
+  const st = require('knex-postgis')(knex)      // ALLOWS FOR postGIS CALCULATIONS
 
   router.get("/", (req, res) => {
     console.log(req.query)
@@ -11,15 +19,38 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
-let marker = []
-//This is the post that receive the marker object. It only console
-//logs for now, we need to add to database.
+  router.get("/markers", (req, res) => {
+    knex.select('*', st.asText('loc')).from('points')
+    .then((results) => {
+      res.json(results)
+    })
+  })
+
   router.post("/marker", (req, res) => {
-    console.log("gotcha")
     res.status(200)
     const body = req.body
     console.log("this is the body:", body)
     marker.push(body)
+    let data = req.body
+    let output
+
+    knex.insert({
+      mapid: data.mapid,
+      loc: st.geomFromText(`Point(${Number(data.lat)} ${Number(data.lng)})`, 4326),
+      title: data.title,
+      info: data.description,
+      createdby: data.userid,
+      image: data.image
+    }).into('points')
+    // .then(() => {        // this will display POINT info from database
+    //   knex.select('*', st.asText('loc')).from('points')
+    //   .then((results) => {
+    //     output = results
+    //   })
+    //   .then(() => {
+    //     console.log("points print: ", output)
+    //   })
+    // })
   })
 
   router.get("/markers", (req, res) => {
