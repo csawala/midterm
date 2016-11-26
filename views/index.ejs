@@ -19,7 +19,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown">Create a map<span class="caret"></span></a>
 						<ul class="dropdown-menu" style="padding: 20px 10px 5px 10px; width:300px;">
 							<li>
-								<form id="createNewMapForm" action="api/maps">
+								<form id="createNewMapForm" action="api/maps" method="POST">
 									<div class="form-group" >
                     <label for="title">Map title:</label>
 										<input type="text" name="title" class="form-control" id="inputTitle" placeholder="title">
@@ -55,13 +55,13 @@
 
 
 	<!-- Logout -->
-  <form action="/api/users" class="form-inline" method="POST">
+  <form action="/api/users/logout" method="POST" class="form-inline">
     <div class="button">
     <button id="logoutButton" type="submit" class="btn btn-primary">Logout</button>
   </div>
 
   </form>
- <!-- create onclick function that takes info entered into form and submits it to /api/maps -->
+
 
   <script>
 
@@ -73,11 +73,5 @@
 
 
 
-// $("#mapFormInput :input").each(function(index) {
-//     $(this).on("click", function(){
-//       var parameter = $(this).val();
-//       window.location = "/api/maps" + parameter;
-//     });
-// });
 
   </script>
