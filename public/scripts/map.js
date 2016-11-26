@@ -1,5 +1,7 @@
 
 "use strict"
+let tempMarkers = []
+let userMarkers = []
 
 
 function initMap() {
@@ -11,8 +13,7 @@ function initMap() {
   map.setOptions({draggableCursor:'crosshair'});
 
   const geocoder = new google.maps.Geocoder();
-  let tempMarkers = []
-  let userMarkers = []
+
 
   // $('#location').on('click', function() {
   //   geocodeAddress(geocoder, map);
@@ -59,9 +60,9 @@ const onClickMarker = () => {
           position: location,
           map: map
         });
-      console.log("location:", location)
       tempMarkers.push(tempMarker);
     }
+
     function setMapOnAll(map) {
       for (var i = 0; i < tempMarkers.length; i++) {
         tempMarkers[i].setMap(map);
@@ -145,7 +146,7 @@ onClickMarker()
 //   google.maps.event.addListener(map, 'click', function(event) {
 //     placeMarker(event.latLng);
 // });
-}
+
 
 ///beyond this point, everything is out of the mapinit functio//
 
@@ -164,19 +165,51 @@ const saveMarker = () => {
     $.ajax({
         url: "/api/maps/marker",
         method: "POST",
-        data: marker,
-        success: () => {
-          console.log("Ajax came thru")},
-        error: (err) => {
-          console.log("this is the error:", err)
-        }
+        data: marker
+      }).then(getMarkers())
+        .catch("error on ajax")
       })
+}
+
+const getMarkers = () => {
+  $.get("/api/maps/markers", function(data) {
+    console.log("get request made")
+    //clearMarkers
+    //renderMarkers
+    console.log("this is the data from get request:", data)
   })
 }
 
-$(()=>{
+const buildUserMarkers = (rawMarkersData) => {
+  rawMarkersData.forEach(function(markerData){
+    const location = new google.maps.LatLng({lat: "?", lng: "?"})
+    const title = "?"
+    //description should probably only be used in the window info
+    let userMarker = new google.maps.Marker({
+          position: location,
+          map: map,
+          title:
+        });
+      tempMarkers.push(userMarker);
+  })
+}
+
+const setUserMarkers = (map) => {
+  userMarkers.forEach(function(marker) {
+    marker.setMap(map)
+  })
+}
+
+const clearUserMarkers = (map) => {
+   setUserMarkers(null);
+}
 saveMarker()
-})
+}
+
+
+// $(()=>{
+// saveMarker()
+// })
 
 // function getToAddress(geocoder, resultsMap) {
 //   var address = $('#location').val();
