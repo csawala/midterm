@@ -85,6 +85,5 @@ router.post("/logout", (req, res) => {
   res.redirect("/api/users/login");
 });
 
-
 return router;
 }

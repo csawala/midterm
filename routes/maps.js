@@ -20,6 +20,19 @@ module.exports = (knex) => {
   });
 
 
+  router.get("/view/:title/:info", (req, res) => {
+    const tempateVars = {
+      MAP_API: process.env.MAP_API,
+      title: req.params.title,
+      info: req.params.info
+    }
+    res.render("map", templateVars)
+  })
+
+//This is the post that receive the marker object. It only console
+//logs for now, we need to add to database.
+
+
   router.get("/markers", (req, res) => {
     knex.select('*', st.asText('loc')).from('points')
     .then((results) => {
@@ -29,6 +42,7 @@ module.exports = (knex) => {
 
   //This is the post that receive the marker object. It only console
   //logs for now, we need to add to database.
+
   router.post("/marker", (req, res) => {
     res.status(200)
     let data = req.body
@@ -58,6 +72,19 @@ module.exports = (knex) => {
       MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
     res.render("mapbox", templateVars)
   })
+
+
+  router.post("/mapInfo", (req, res) => {
+    console.log(req.body);
+    knex('maps')
+    .insert({
+    title: req.body.title,
+    info: req.body.info
+    })
+    .then(() => {
+    })
+  res.redirect("/api/maps")
+})
 
   return router;
 }
