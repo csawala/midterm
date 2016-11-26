@@ -11,6 +11,15 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
+  router.get("/view/:title/:description", (req, res) => {
+    const tempateVars = {
+      MAP_API: process.env.MAP_API,
+      title: req.params.title,
+      description: req.params.description
+    }
+    res.render("map", templateVars)
+  })
+
 //This is the post that receive the marker object. It only console
 //logs for now, we need to add to database.
   router.post("/marker", (req, res) => {
@@ -25,6 +34,19 @@ module.exports = (knex) => {
       MAP_BOX_API_PUBLIC: process.env.MAP_BOX_API_PUBLIC}
     res.render("mapbox", templateVars)
   })
+
+
+  router.post("/mapInfo", (req, res) => {
+    console.log(req.body);
+    knex('maps')
+    .insert({
+    title: req.body.title,
+    info: req.body.info
+    })
+    .then(() => {
+    })
+  res.redirect("/api/maps")
+})
 
   return router;
 }

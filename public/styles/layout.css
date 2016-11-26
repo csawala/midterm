@@ -1,0 +1,102 @@
+body {
+  background-color: #EEE;
+}
+
+body h1 {
+  color: #244751;
+}
+
+#loginForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+.signInButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signUpButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#SignUpText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 400%;
+}
+
+#logoutButton {
+  margin-left: 6em;
+  margin-bottom: 2em;
+}
+
+.navbar-default .navbar-nav > li.clr1 a {
+  color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li.clr2 a {
+  color: #FFEB3B;
+}
+
+.navbar-default .navbar-nav > li.clr3 a {
+  color: #5EC64D;
+}
+
+.navbar-default .navbar-nav > li.clr4 a {
+  color: #29AAE2;
+}
+
+.navbar-default .navbar-nav > li.clr1 a:hover, .navbar-default .navbar-nav > li.clr1.active a {
+  color: #fff;
+  background: #F55;
+}
+
+.navbar-default .navbar-nav > li.clr2 a:hover, .navbar-default .navbar-nav > li.clr2.active a {
+  color: #fff;
+  background: #973CB6;
+}
+
+.navbar-default .navbar-nav > li.clr3 a:hover, .navbar-default .navbar-nav > li.clr3.active a {
+  color: #fff;
+  background: #5EC64D;
+}
+
+.navbar-default .navbar-nav > li.clr4 a:hover, .navbar-default .navbar-nav > li.clr4.active a {
+  color: #fff;
+  background: #29AAE2;
+}
+
+.navbar-default {
+  background-color: #3b5998;
+  font-size: 18px;
+}
+
+.navbar-default .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-text {
+  color: #ffffff;
+}
+
+a {
+  color: #FFC107;
+  text-decoration: none;
+}
