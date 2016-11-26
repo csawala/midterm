@@ -58,9 +58,12 @@ const onClickMarker = () => {
     function addMarker(location) {
       let tempMarker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
+          title: "Temporary Marker",
+          description: "temporary description"
         });
       tempMarkers.push(tempMarker);
+      console.log("this is the position from the marker:", tempMarker.description)
     }
 
     function setMapOnAll(map) {
@@ -93,7 +96,7 @@ const onClickMarker = () => {
   })
 }
 
-onClickMarker()
+  onClickMarker()
 
 
 
@@ -206,6 +209,39 @@ const setUserMarkers = (map) => {
 const clearUserMarkers = () => {
    setUserMarkers(null);
 }
+
+const userMarkersWindow = (markers) => {
+  markers.forEach(function (marker) {
+    if (markers.length === 0) {
+      return
+    }
+
+    google.maps.event.addListener(marker, "click", function (event) {
+      let infowindow = new google.maps.InfoWindow;
+      let latitude = event.latLng.lat();
+      let longitude = event.latLng.lng();
+      geocodeLatLng(geocoder, map, infowindow)
+
+      function geocodeLatLng(geocoder, map, infowindow) {
+        let latlng = {lat: latitude, lng: longitude};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              infowindow.setContent(results[1].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+    // Center of map
+    map.panTo(new google.maps.LatLng(latitude,longitude));
+  });
+  })
+  }
 
 saveMarker()
 setUserMarkers()
