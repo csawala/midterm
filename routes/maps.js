@@ -11,15 +11,14 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
+//This is the post that receive the marker object. It only console
+//logs for now, we need to add to database.
   router.post("/marker", (req, res) => {
     console.log("gotcha")
     res.status(200)
-
-
-      //   .insert({
-      //     posiiton: body
-      //   })
-      })
+    const body = req.body
+    console.log("this is the body:", body)
+  })
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,

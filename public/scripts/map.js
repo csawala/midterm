@@ -59,7 +59,6 @@ const onClickMarker = () => {
           position: location,
           map: map
         });
-      console.log(tempMarker)
       console.log("location:", location)
       tempMarkers.push(tempMarker);
     }
