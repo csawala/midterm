@@ -93,16 +93,9 @@ module.exports = (knex) => {
     // console.log(req.body);
     knex('maps')
     .insert({
-    title: req.body.title,
-    info: req.body.info
+      title: req.body.title,
+      info: req.body.info
     })
-
-    .then(() => {
-      res.redirect("/api/maps")
-    })
-
-})
-
     .returning('id')
     .then((mapId) => {
       // add mapId value to cookie for this particular map
