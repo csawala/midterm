@@ -24,14 +24,14 @@ module.exports = (knex) => {
 
 
 
-  // router.get("/view/:title/:info", (req, res) => {
-  //   const templateVars = {
-  //     MAP_API: process.env.MAP_API,
-  //     title: req.params.title,
-  //     info: req.params.info
-  //   }
-  //   res.render("map", templateVars)
-  // })
+  router.get("/view/:title/:info", (req, res) => {
+    const templateVars = {
+      MAP_API: process.env.MAP_API,
+      title: req.params.title,
+      info: req.params.info
+    }
+    res.render("map", templateVars)
+  })
 
 
   router.get("/markers", (req, res) => {
@@ -59,9 +59,9 @@ module.exports = (knex) => {
       .then((results) => {
         output = results
       })
-      .then(() => {
-        console.log("points print: ", output)
-      })
+      // .then(() => {
+      //   console.log("points print: ", output)
+      // })
     })
   })
 
@@ -84,6 +84,14 @@ module.exports = (knex) => {
     })
   res.redirect("/api/maps")
 })
+
+  router.put("/marker/delete", (req, res) => {
+    let data = req.body
+    res.status(200).send("received")
+    console.log("delete marker put request received")
+
+  })
+
 
   return router;
 }

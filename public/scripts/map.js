@@ -38,18 +38,6 @@ function initMap() {
     });
   }
 
-
-
-  // {
-  //   adddress: "sdvsdvsd",
-  //   gmap_marker_data: {
-  //     position: {
-  //       lat: 3234,
-  //       lng: 2343
-  //     }
-  //   }
-  //   description: "sdfsdf sdfs dsd fsd fsd f"
-  // }
 const onClickMarker = () => {
   google.maps.event.addListener(map, 'click', function(event) {
     // map.setCenter(event.latLng)
@@ -154,24 +142,35 @@ const onClickMarker = () => {
 
 
 ///beyond this point, everything is out of the mapinit functio//
+const clearForm = (elements) => {
+  elements.forEach(function($element) {
+    $element.val("");
+  })
+}
 
 const saveMarker = () => {
   $("#save-form").on('submit', function(event) {
     event.preventDefault()
 
-    const lat = $("#latitude").val()
-    const lng = $("#longitude").val()
-    const title = $("#title").val()
-    const description = $("#description").val()
+    const $lat = $("#latitude");
+    const $lng = $("#longitude");
+    const $title = $("#title");
+    const $description = $("#description");
+    const $address = $("#address");
 
-    const marker = {lat, lng, title, description}
-    console.log("that's the marker:", marker)
+    const lat = $("#latitude").val();
+    const lng = $("#longitude").val();
+    const title = $("#title").val();
+    const description = $("#description").val();
+
+    const marker = {lat, lng, title, description};
 
     $.ajax({
         url: "/api/maps/marker",
         method: "POST",
         data: marker
       }).then(getMarkers())
+        .then(clearForm([$lat, $lng, $title, $description, $address]))
         .catch("error on ajax")
       })
 }
@@ -182,7 +181,6 @@ const getMarkers = () => {
     // clearUserMarkers()
     buildUserMarkers(data)
     setUserMarkers(map)
-    console.log("this is the data from get request:", data)
   })
 }
 
@@ -190,20 +188,23 @@ const buildUserMarkers = (rawMarkersData) => {
   rawMarkersData.forEach(function(markerData) {
     const location = new google.maps.LatLng({lat: markerData.st_x, lng: markerData.st_y})
     const title = markerData.title
+    const info = markerData.info
     //description should probably only be used in the window info
     let userMarker = new google.maps.Marker({
           position: location,
           map: map,
-          title: title
+          title: title,
+          info: info
         });
       userMarkers.push(userMarker);
+      userMarkersWindow(userMarker)
   })
 }
 
 const setUserMarkers = (map) => {
   userMarkers.forEach(function(marker) {
     marker.setMap(map)
-    userMarkersWindow(marker)
+    // userMarkersWindow(marker)
   })
 }
 
@@ -213,29 +214,66 @@ const clearUserMarkers = () => {
 
 const userMarkersWindow = (marker) => {
   // markers.forEach(function (marker) {
-  //   if (markers.length === 0) {
-  //     return
-  //   }
+  //   // if (markers.length === 0) {
+  //   //   return
+  //   // }
 
     google.maps.event.addListener(marker, "click", function (event) {
       let infowindow = new google.maps.InfoWindow;
       let latitude = marker.position.lat();
-      console.log("latitude in window:", latitude)
       let longitude = marker.position.lng();
-      console.log("longitude in window:", longitude)
-
+      let title = marker.title
+      let info = marker.info
       getAddress(latitude, longitude, (address) => {
-        console.log("this is the address in the marker window:", address)
-        infowindow.setContent(address);
+
+        let contentString = `<div id="content">
+          <div id="siteNotice">
+          </div>
+          <h1 id="firstHeading" class="firstHeading">${title}</h1>
+          <h2 id="marker-address"> ${address}</h2>
+          <div id="image"><img></div>
+          <div id="bodyContent">
+          <p>${info}</p>
+          <p></p>
+          <footer>
+          <form class="delete-form" method="POST" action="/api/maps/marker/delete">
+            <input style="display:none" class="marker-id" name="marker-id" type="text">
+            <button type="submit" name="delete-marker">Delete Marker</button>
+          </form>
+          </footer>
+          </div>
+          </div>`;
+        infowindow.setContent(contentString);
         infowindow.open(map, marker);
+        $("#content .marker-id").val(title)
+        // deleteMarker(marker, $("#delete-button"));
         // Center of map
       map.panTo(new google.maps.LatLng(latitude,longitude));
     });
   })
+// })
 }
 
+// const deleteMarker = function (marker, button) {
+//   console.log("delete marker entered")
+//   console.log("the button element:", button)
+//   button.on("submit", function(event) {
+//     console.log("delete button ajax activated")
+//     $.ajax({
+//       url: "/api/maps/marker/delete",
+//       method: "PUT",
+//       data: marker.title
+//     }).then(console.log("marker deleted"))
+//   })
+// }
+
+
+getMarkers()
 saveMarker()
-setUserMarkers()
+// setUserMarkers()
+// userMarkersWindow(userMarkers)
+// console.log("userMarkers:", userMarkers)
+// console.log("userMarkers length:", userMarkers.length)
 }
 
 
