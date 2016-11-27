@@ -46,6 +46,12 @@ body h1 {
   margin-bottom: 2em;
 }
 
+.MyMapsUser {
+  padding-top: 4em;
+  margin: 1em 1em 1em 1em;
+  overflow: hidden;
+}
+
 .navbar-default .navbar-nav > li.clr1 a {
   color: #ffffff;
 }

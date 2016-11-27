@@ -43,6 +43,17 @@
 </div>
 
 
+<% maps.forEach(function (map) {  %>
+<div class="MyMapsUser">
+  <p><%=map.title %></p>
+  <label for="description">Description:</label>
+  <p><%=map.info %></p>
+  <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&key=AIzaSyAp4PkaVG6Iy1hxCMrhGz1I7bQk3ZsQCFk"/>
+</div>
+<% }) %>
+
+<!-- https://lh6.googleusercontent.com/4GnfwCgCuB3v6A-dzuKzSgOwIrCSJU8d_F7iQyefZiflw-SP5hEnKkoXG0iRlJWWt8AL0kIGABuh=s220 -->
+
 <!-- have the div in map.ejs render here -->
 
 
@@ -59,19 +70,3 @@
     <div class="button">
     <button id="logoutButton" type="submit" class="btn btn-primary">Logout</button>
   </div>
-
-  </form>
-
-
-  <script>
-
-  $("#createNewMapForm").submit(function(event){
-    event.preventDefault();
-    var newMapForm = $("#createNewMapForm").serialize()
-    window.location = "/api/maps?" + newMapForm;
-});
-
-
-
-
-  </script>
