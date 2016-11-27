@@ -54,10 +54,35 @@ app.use(cookieSession({
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 
+
+// app.get("/", (req, res) => {
+//   knex
+//   .select("title", "maps.id")
+//   .from("maps")
+//   .innerJoin('users', 'maps.id', 'users.id')
+//   .then((results) => {
+//     res.json(results);
+// });
+// });
+
+
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  knex
+    .select("title", "info")
+    .from("maps")
+    .then((results) => {
+      let templateVars = {
+        maps: results
+      }
+      // res.json(results)
+    console.log(results);
+    res.render("index", templateVars);
+    });
 });
+
+
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

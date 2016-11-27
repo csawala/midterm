@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 module.exports = (knex) => {
   const st = require('knex-postgis')(knex)      // ALLOWS FOR postGIS CALCULATIONS
 
+// this route gets query parameters from what is inserted into the mab submit form
+// we needed this to access tge query params at api/maps
+
   router.get("/", (req, res) => {
     const templateVars = {
       title: req.query.title,
@@ -21,6 +24,7 @@ module.exports = (knex) => {
       FILESTACK_API: process.env.FILESTACK_API
     }
       console.log(templateVars);
+
     res.render("map", templateVars)
   });
 
@@ -83,13 +87,22 @@ module.exports = (knex) => {
   })
 
 
+// this route adds map data to database when the form at api/users is submitted
+
   router.post("/mapInfo", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     knex('maps')
     .insert({
     title: req.body.title,
     info: req.body.info
     })
+
+    .then(() => {
+      res.redirect("/api/maps")
+    })
+
+})
+
     .returning('id')
     .then((mapId) => {
       // add mapId value to cookie for this particular map
@@ -106,6 +119,7 @@ module.exports = (knex) => {
 
     res.redirect("/api/maps")
   })
+
 
 
 
