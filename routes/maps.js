@@ -14,20 +14,25 @@ module.exports = (knex) => {
   const st = require('knex-postgis')(knex)      // ALLOWS FOR postGIS CALCULATIONS
 
   router.get("/", (req, res) => {
-    console.log(req.query)
-    const templateVars = { MAP_API: process.env.MAP_API }
+    const templateVars = {
+      title: req.query.title,
+      info: req.query.info,
+      MAP_API: process.env.MAP_API }
+      console.log(templateVars);
     res.render("map", templateVars)
   });
 
 
-  router.get("/view/:title/:info", (req, res) => {
-    const templateVars = {
-      MAP_API: process.env.MAP_API,
-      title: req.params.title,
-      info: req.params.info
-    }
-    res.render("map", templateVars)
-  })
+
+  // router.get("/view/:title/:info", (req, res) => {
+  //   const templateVars = {
+  //     MAP_API: process.env.MAP_API,
+  //     title: req.params.title,
+  //     info: req.params.info
+  //   }
+  //   res.render("map", templateVars)
+  // })
+
 
   router.get("/markers", (req, res) => {
     knex.select('*', st.x('loc'), st.y('loc')).from('points')
