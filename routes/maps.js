@@ -20,21 +20,25 @@ module.exports = (knex) => {
     const templateVars = {
       title: req.query.title,
       info: req.query.info,
-      MAP_API: process.env.MAP_API }
-      // console.log(templateVars);
+      MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API
+    }
+      console.log(templateVars);
+
     res.render("map", templateVars)
   });
 
 
 
-  // router.get("/view/:title/:info", (req, res) => {
-  //   const templateVars = {
-  //     MAP_API: process.env.MAP_API,
-  //     title: req.params.title,
-  //     info: req.params.info
-  //   }
-  //   res.render("map", templateVars)
-  // })
+  router.get("/view/:title/:info", (req, res) => {
+    const templateVars = {
+      MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API,
+      title: req.params.title,
+      info: req.params.info
+    }
+    res.render("map", templateVars)
+  })
 
 
   router.get("/markers", (req, res) => {
@@ -62,12 +66,19 @@ module.exports = (knex) => {
       .then((results) => {
         output = results
       })
-      .then(() => {
-        console.log("points print: ", output)
-      })
+      // .then(() => {
+      //   console.log("points print: ", output)
+      // })
     })
   })
 
+  router.delete("marker/delete", (req, res) => {
+    // delete selected marker point
+    let data = req.body
+    console.log(data)
+
+    knex('points')
+  })
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
@@ -85,11 +96,32 @@ module.exports = (knex) => {
     title: req.body.title,
     info: req.body.info
     })
+
     .then(() => {
       res.redirect("/api/maps")
     })
 
 })
+
+    .returning('id')
+    .then((mapId) => {
+      // add mapId value to cookie for this particular map
+      req.session.map_id = Number(mapId)
+      knex('usermaps')
+      .insert({
+        userid: req.session.user_id,
+        mapid: Number(mapId)
+      })
+      .then(() => {
+        console.log("new map cookie [user][map]: ", req.session.user_id, req.session.map_id)
+      })
+    })
+
+    res.redirect("/api/maps")
+  })
+
+
+
 
   return router;
 }
