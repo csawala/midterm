@@ -17,7 +17,9 @@ module.exports = (knex) => {
     const templateVars = {
       title: req.query.title,
       info: req.query.info,
-      MAP_API: process.env.MAP_API }
+      MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API
+    }
       console.log(templateVars);
     res.render("map", templateVars)
   });
@@ -27,6 +29,7 @@ module.exports = (knex) => {
   router.get("/view/:title/:info", (req, res) => {
     const templateVars = {
       MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API,
       title: req.params.title,
       info: req.params.info
     }
@@ -85,12 +88,6 @@ module.exports = (knex) => {
   res.redirect("/api/maps")
 })
 
-  router.put("/marker/delete", (req, res) => {
-    let data = req.body
-    res.status(200).send("received")
-    console.log("delete marker put request received")
-
-  })
 
 
   return router;

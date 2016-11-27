@@ -9,6 +9,9 @@
     <script type="text/javascript" src="/scripts/map.js"></script>
     <!-- <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script> -->
     <!-- <script type="text/javascript" src="/scripts/marker-form.js"></script> -->
+    <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+
+
 
   </head>
   <body>
@@ -58,6 +61,10 @@
               </div>
               <div class="form-group">
                 <input class="form-control" placeholder="Description" name="password" id ="description" type="text">
+              </div>
+              <div class="form-group">
+                <input type="filepicker" data-fp-apikey="AKcdCyABqRbyyfpTFmqhmz"
+onchange="alert(event.fpfile.url)">
               </div>
               <div>
                 </div>
