@@ -41,7 +41,7 @@ width: auto;
 .mapInformation {
   margin-top: 0.5em;
   margin-left: 2em;
-  margin-bottome: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 
@@ -50,6 +50,6 @@ width: auto;
 }
 
 .panel-default {
-  display: inline-tableflex;
+  display: inline-table flex;
   width: 280%;
 }
