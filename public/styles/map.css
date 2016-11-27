@@ -1,20 +1,13 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
-
 #map {
 height: 100%;
-width: 100%;
-
+width: 250%;
 }
-
-
 /* Optional: Makes the sample page fill the window. */
 html, body {
 display: flex;
-
 }
-
-
 #get-to-address {
 position: absolute;
 top: 10px;
@@ -28,28 +21,21 @@ font-family: 'Roboto','sans-serif';
 line-height: 30px;
 padding-left: 10px;
 }
-
-
 .marker-form {
 /*flex-order: 2;*/
 /*flex-grow: 1;*/
 float: right;
 width: auto;
 }
-
-
 .mapInformation {
   margin-top: 0.5em;
   margin-left: 2em;
-  margin-bottom: 0.5em;
+  margin-bottome: 0.5em;
 }
-
-
 .vertical-offset-100{
   padding-top: 4em;
 }
-
 .panel-default {
-  display: inline-tableflex;
+  display: tableflex;
   width: 280%;
 }
