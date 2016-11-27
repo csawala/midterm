@@ -68,6 +68,13 @@ module.exports = (knex) => {
     })
   })
 
+  router.delete("marker/delete", (req, res) => {
+    // delete selected marker point
+    let data = req.body
+    console.log(data)
+
+    knex('points')
+  })
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
@@ -83,10 +90,22 @@ module.exports = (knex) => {
     title: req.body.title,
     info: req.body.info
     })
-    .then(() => {
+    .returning('id')
+    .then((mapId) => {
+      // add mapId value to cookie for this particular map
+      req.session.map_id = Number(mapId)
+      knex('usermaps')
+      .insert({
+        userid: req.session.user_id,
+        mapid: Number(mapId)
+      })
+      .then(() => {
+        console.log("new map cookie [user][map]: ", req.session.user_id, req.session.map_id)
+      })
     })
-  res.redirect("/api/maps")
-})
+
+    res.redirect("/api/maps")
+  })
 
 
 

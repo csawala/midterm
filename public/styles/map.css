@@ -4,59 +4,52 @@
   /*flex order: 1;*/
   /*flex-grow: 2;*/
   height: 100%;
-  width: 100%;
+  width: 250%;
   }
   /* Optional: Makes the sample page fill the window. */
-  html, body {
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  }
 
+html, body {
+display: flex;
 
- /* #floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-  }*/
-
-
-  #get-to-address {
-  flex-order: 3;
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-  }
-
-  .marker-form {
-  /*flex-order: 2;*/
-  /*flex-grow: 1;*/
-  float: right;
-  width: auto;
-  }
-
-
-.vertical-offset-100{
-    padding-top:100px;
 }
 
 
+#get-to-address {
+position: absolute;
+top: 10px;
+left: 25%;
+z-index: 5;
+background-color: #fff;
+padding: 5px;
+border: 1px solid #999;
+text-align: center;
+font-family: 'Roboto','sans-serif';
+line-height: 30px;
+padding-left: 10px;
+}
+
+
+.marker-form {
+/*flex-order: 2;*/
+/*flex-grow: 1;*/
+float: right;
+width: auto;
+}
+
+
+.mapInformation {
+  margin-top: 0.5em;
+  margin-left: 2em;
+  margin-bottom: 0.5em;
+}
+
+
+.vertical-offset-100{
+  padding-top: 4em;
+}
+
+.panel-default {
+  display: inline-table flex;
+  width: 280%;
+}
 
