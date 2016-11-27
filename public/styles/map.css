@@ -2,17 +2,16 @@
 * element that contains the map. */
 
 #map {
-
 height: 100%;
 width: 100%;
 
-
+}
 
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
 display: flex;
-flex-direction: row;
+
 }
 
 
@@ -32,6 +31,8 @@ padding-left: 10px;
 
 
 .marker-form {
+/*flex-order: 2;*/
+/*flex-grow: 1;*/
 float: right;
 width: auto;
 }
@@ -45,10 +46,10 @@ width: auto;
 
 
 .vertical-offset-100{
-  padding-top: 3em;
+  padding-top: 4em;
 }
 
 .panel-default {
-  display:inline-tableflex;
+  display: inline-tableflex;
   width: 280%;
 }
