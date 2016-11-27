@@ -241,14 +241,14 @@ setUserMarkers()
 // saveMarker()
 // })
 
-// function getToAddress(geocoder, resultsMap) {
-//   var address = $('#location').val();
-//   geocoder.geocode({'address': address}, function(results, status) {
-//     if (status === 'OK') {
-//       resultsMap.setCenter(results[0].geometry.location);
-//     }
-//   })
-// }
+function getToAddress(geocoder, resultsMap) {
+  var address = $('#location').val();
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+    }
+  })
+}
 
 // function geocodeAddress(geocoder, resultsMap) {
 //   var address = $('#address').val();
