@@ -17,21 +17,24 @@ module.exports = (knex) => {
     const templateVars = {
       title: req.query.title,
       info: req.query.info,
-      MAP_API: process.env.MAP_API }
+      MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API
+    }
       console.log(templateVars);
     res.render("map", templateVars)
   });
 
 
 
-  // router.get("/view/:title/:info", (req, res) => {
-  //   const templateVars = {
-  //     MAP_API: process.env.MAP_API,
-  //     title: req.params.title,
-  //     info: req.params.info
-  //   }
-  //   res.render("map", templateVars)
-  // })
+  router.get("/view/:title/:info", (req, res) => {
+    const templateVars = {
+      MAP_API: process.env.MAP_API,
+      FILESTACK_API: process.env.FILESTACK_API,
+      title: req.params.title,
+      info: req.params.info
+    }
+    res.render("map", templateVars)
+  })
 
 
   router.get("/markers", (req, res) => {
@@ -59,9 +62,9 @@ module.exports = (knex) => {
       .then((results) => {
         output = results
       })
-      .then(() => {
-        console.log("points print: ", output)
-      })
+      // .then(() => {
+      //   console.log("points print: ", output)
+      // })
     })
   })
 
@@ -103,6 +106,8 @@ module.exports = (knex) => {
 
     res.redirect("/api/maps")
   })
+
+
 
   return router;
 }

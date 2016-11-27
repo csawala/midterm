@@ -1,14 +1,13 @@
-/* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
+  /* Always set the map height explicitly to define the size of the div
+  * element that contains the map. */
+  #map {
+  /*flex order: 1;*/
+  /*flex-grow: 2;*/
+  height: 100%;
+  width: 250%;
+  }
+  /* Optional: Makes the sample page fill the window. */
 
-#map {
-height: 100%;
-width: 250%;
-
-}
-
-
-/* Optional: Makes the sample page fill the window. */
 html, body {
 display: flex;
 
@@ -53,3 +52,4 @@ width: auto;
   display: inline-table flex;
   width: 280%;
 }
+
