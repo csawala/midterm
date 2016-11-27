@@ -45,6 +45,12 @@
 
 <!-- have the div in map.ejs render here -->
 
+  <section class="mapPage">
+    <div class="miniMap">
+      THIS IS WHERE THINGS WILL GO
+      BUT WHERE THE FUCK IS IT?!?!
+    </div>
+  </section>
 
 	<!-- /.navbar -->
 <div class="navbar navbar-default navbar-fixed-bottom">
@@ -65,11 +71,11 @@
 
   <script>
 
-  $("#createNewMapForm").submit(function(event){
-    event.preventDefault();
-    var newMapForm = $("#createNewMapForm").serialize()
-    window.location = "/api/maps?" + newMapForm;
-});
+//   $("#createNewMapForm").submit(function(event){
+//     event.preventDefault();
+//     var newMapForm = $("#createNewMapForm").serialize()
+//     window.location = "/api/maps?" + newMapForm;
+// });
 
 
 
