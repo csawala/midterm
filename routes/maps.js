@@ -22,29 +22,24 @@ module.exports = (knex) => {
     res.render("map", templateVars)
   });
 
-  //
-  // router.get("view/:title/:info", (req, res) => {
+
+
+  // router.get("/view/:title/:info", (req, res) => {
   //   const templateVars = {
   //     MAP_API: process.env.MAP_API,
-  //     title: req.query.title,
-  //     info: req.query.info
+  //     title: req.params.title,
+  //     info: req.params.info
   //   }
   //   res.render("map", templateVars)
   // })
 
-//This is the post that receive the marker object. It only console
-//logs for now, we need to add to database.
-
 
   router.get("/markers", (req, res) => {
-    knex.select('*', st.asText('loc')).from('points')
+    knex.select('*', st.x('loc'), st.y('loc')).from('points')
     .then((results) => {
       res.json(results)
     })
   })
-
-  //This is the post that receive the marker object. It only console
-  //logs for now, we need to add to database.
 
   router.post("/marker", (req, res) => {
     res.status(200)
@@ -59,16 +54,17 @@ module.exports = (knex) => {
       createdby: data.userid,
       image: data.image
     }).into('points')
-    // .then(() => {        // this will display POINT info from database
-    //   knex.select('*', st.asText('loc')).from('points')
-    //   .then((results) => {
-    //     output = results
-    //   })
-    //   .then(() => {
-    //     console.log("points print: ", output)
-    //   })
-    // })
+    .then(() => {        // this will display POINT info from database
+      knex.select('*', st.asText('loc')).from('points')
+      .then((results) => {
+        output = results
+      })
+      .then(() => {
+        console.log("points print: ", output)
+      })
+    })
   })
+
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
