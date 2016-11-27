@@ -16,14 +16,27 @@
       <input id="location" type="textbox" value="Toronto, ON">
       <input id="locate" type="button" value="Get me there!">
     </div>
-    <!-- <div id="floating-panel">
-      <input id="address" type="textbox" value="Sydney, NSW">
-      <input id="submit" type="button" value="Geocode">
-    </div> -->
-    <div id="map"></div>
+
+  <div id="map"> </div>
+
+
+  <div id="myMapForm"
     <div class="container">
     <div class="row vertical-offset-100">
       <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Your Map</h3>
+        </div>
+        <div>
+          <div class="mapInformation">
+            <label for="title">Map title: <%= title %></label>
+          </div>
+          <div class="mapInformation">
+            <label for="description">Description: <%= info %></label>
+          </div>
+        </div>
+        </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Enter marker information</h3>
@@ -31,12 +44,7 @@
           <div class="panel-body">
             <form accept-charset="UTF-8" role="form" id="save-form">
               <fieldset>
-                <div class="form-group">
-                  <input class="form-control" placeholder="mapInfo" name="title" type="text" value="<%= templateVars.title %>">
-              </div>
-              <div class="form-group">
-                <input class="form-control" placeholder="mapInfo" name="info" type="text" value="<%= templateVars.info %>">
-              </div>
+
                 <div class="form-group">
                   <input class="form-control" id="latitude" placeholder="Latitude" name="latitude" type="text">
               </div>
@@ -51,10 +59,7 @@
               <div class="form-group">
                 <input class="form-control" placeholder="Description" name="password" id ="description" type="text">
               </div>
-              <div class="checkbox">
-                  <label>
-                    <input name="remember" type="checkbox" value="Remember Me"> Remember Me
-                  </label>
+              <div>
                 </div>
               <input class="btn btn-lg btn-success btn-block" type="submit" value="SAVE">
             </fieldset>
@@ -64,7 +69,14 @@
     </div>
   </div>
 </div>
+</div>
+
+
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=`${MAP_API}`%>&callback=initMap"></script>
+
+
+
+
   </body>
 </html>
