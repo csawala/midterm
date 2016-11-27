@@ -37,6 +37,8 @@ function initMap() {
     });
   }
 
+
+
   // {
   //   adddress: "sdvsdvsd",
   //   gmap_marker_data: {

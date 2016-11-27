@@ -14,20 +14,23 @@ module.exports = (knex) => {
   const st = require('knex-postgis')(knex)      // ALLOWS FOR postGIS CALCULATIONS
 
   router.get("/", (req, res) => {
-    console.log(req.query)
-    const templateVars = { MAP_API: process.env.MAP_API }
+    const templateVars = {
+      title: req.query.title,
+      info: req.query.info,
+      MAP_API: process.env.MAP_API }
+      console.log(templateVars);
     res.render("map", templateVars)
   });
 
-
-  router.get("/view/:title/:info", (req, res) => {
-    const tempateVars = {
-      MAP_API: process.env.MAP_API,
-      title: req.params.title,
-      info: req.params.info
-    }
-    res.render("map", templateVars)
-  })
+  //
+  // router.get("view/:title/:info", (req, res) => {
+  //   const templateVars = {
+  //     MAP_API: process.env.MAP_API,
+  //     title: req.query.title,
+  //     info: req.query.info
+  //   }
+  //   res.render("map", templateVars)
+  // })
 
 //This is the post that receive the marker object. It only console
 //logs for now, we need to add to database.
