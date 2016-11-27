@@ -1,47 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geocoding service</title>
+    <title>Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../styles/map.css" type="text/css"/>
+    <link rel="stylesheet" href="/styles/map.css" type="text/css"/>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/map.js"></script>
+    <!-- <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script> -->
+    <!-- <script type="text/javascript" src="/scripts/marker-form.js"></script> -->
+
   </head>
   <body>
-    <div id="floating-panel">
-      <input id="address" type="textbox" value="Sydney, NSW">
-      <input id="submit" type="button" value="Geocode">
+    <div id="get-to-address">
+      <input id="location" type="textbox" value="Toronto, ON">
+      <input id="locate" type="button" value="Get me there!">
     </div>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: -34.397, lng: 150.644}
-        });
-        var geocoder = new google.maps.Geocoder();
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
-      }
+  <div id="map"> </div>
 
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%=`${MAP_API}`%>&callback=initMap">
-    </script>
+
+  <div id="myMapForm"
+    <div class="container">
+    <div class="row vertical-offset-100">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Your Map</h3>
+        </div>
+        <div>
+          <div class="mapInformation">
+            <label for="title">Map title: <%= title %></label>
+          </div>
+          <div class="mapInformation">
+            <label for="description">Description: <%= info %></label>
+          </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Enter marker information</h3>
+        </div>
+          <div class="panel-body">
+            <form accept-charset="UTF-8" role="form" id="save-form">
+              <fieldset>
+
+                <div class="form-group">
+                  <input class="form-control" id="latitude" placeholder="Latitude" name="latitude" type="text">
+              </div>
+                    <div class="form-group">
+                  <input class="form-control" id="longitude" placeholder="Longitude" name="longitude" type="text">
+              </div>      <div class="form-group">
+                  <input class="form-control" id="address" placeholder="Address" name="address" type="text">
+              </div>
+                <div class="form-group">
+                  <input class="form-control" placeholder="Title" name="title" id="title" type="text">
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="Description" name="password" id ="description" type="text">
+              </div>
+              <div>
+                </div>
+              <input class="btn btn-lg btn-success btn-block" type="submit" value="SAVE">
+            </fieldset>
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=`${MAP_API}`%>&callback=initMap"></script>
+
+
+
+
   </body>
 </html>
