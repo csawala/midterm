@@ -49,7 +49,7 @@ body h1 {
 .MyMapsUser {
   padding-top: 4em;
   margin: 1em 1em 1em 1em;
-  overflow: hidden;
+  overflow: inline-block;
 }
 
 .navbar-default .navbar-nav > li.clr1 a {

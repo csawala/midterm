@@ -218,9 +218,7 @@ const userMarkersWindow = (marker) => {
           <p></p>
           <footer>
           <form class="delete-form" method="POST" action="/api/maps/marker/delete">
-            <input style="display:none" class="latitude" name="latitude" type="text">
-            <input style="display:none" class="longitude" name="longitude" type="text">
-            <input  class="loc" name="loc" type="text">
+            <input style="display:none" class="loc" name="loc" type="text">
             <button type="submit" name="delete-marker">Delete Marker</button>
           </form>
           </footer>
@@ -229,8 +227,8 @@ const userMarkersWindow = (marker) => {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
         // const markerId = {}
-        $(".delete-form .latitude").val(latitude);
-        $(".delete-form .longitude").val(longitude);
+        // $(".delete-form .latitude").val(latitude);
+        // $(".delete-form .longitude").val(longitude);
         $(".delete-form .loc").val(loc);
 
         // deleteMarker(marker, $("#delete-button"));
