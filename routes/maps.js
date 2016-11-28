@@ -29,7 +29,6 @@ module.exports = (knex) => {
   });
 
 
-
   router.get("/view/:title/:info", (req, res) => {
     const templateVars = {
       MAP_API: process.env.MAP_API,
@@ -72,13 +71,6 @@ module.exports = (knex) => {
     })
   })
 
-  router.delete("marker/delete", (req, res) => {
-    // delete selected marker point
-    let data = req.body
-    console.log(data)
-
-    knex('points')
-  })
 
   router.get("/mapbox", (req, res) => {
     const templateVars = {MAP_BOX_API_PRIVATE: process.env.MAP_BOX_API_PRIVATE,
@@ -109,10 +101,49 @@ module.exports = (knex) => {
         console.log("new map cookie [user][map]: ", req.session.user_id, req.session.map_id)
       })
     })
+    let title = req.body.title
+    let info = req.body.info
 
-    res.redirect("/api/maps")
+    console.log("info request:", info)
+
+    res.redirect(`view/${title}/${info}`)
   })
 
+  router.post("/marker/delete", (req, res) => {
+    // delete selected marker point
+    const {latitude, longitude} = req.body
+    const {user_id, map_id} = req.session
+
+    console.log("cookies map_id:", req.session.map_id)
+
+
+    // delete selected marker point
+    let coord = st.geomFromText(`Point(${Number(latitude)} ${Number(longitude)})`, 4326)
+    console.log("these are the coordinates coded:", coord)
+    console.log("that's the cookie user_id:", user_id)
+    console.log("that's the cookies map_id:", map_id)
+
+    knex('points')
+    .where({
+      createdby: user_id,
+      // mapid: map_id,
+      loc: coord
+    })
+    .del()
+    .then(() => {     // simply prints out the updated list of points
+      knex.select('*', st.asText('loc')).from('points')
+      .then((results) => {
+        console.log(results)
+      })
+    })                // can comment out above `.then` section [from previous comment]
+    .then(() => {
+      res.status(200).send('Successfully Baleeted!')
+    })
+    .catch((err) => {
+      console.log('Something done gone not worked right')
+    })
+    res.redirect("/api/maps")
+  })
 
 
   return router;
