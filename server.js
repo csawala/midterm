@@ -55,29 +55,22 @@ app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 
 
-// app.get("/", (req, res) => {
-//   knex
-//   .select("title", "maps.id")
-//   .from("maps")
-//   .innerJoin('users', 'maps.id', 'users.id')
-//   .then((results) => {
-//     res.json(results);
-// });
-// });
 
 
-// Home page
+
+
 app.get("/", (req, res) => {
-  knex
-    .select("title", "info")
-    .from("maps")
-    .then((results) => {
+  knex.select("*")
+     .from("maps")
+     .join('users', 'users.id', 'maps.id')
+     .then((results) => {
+      results = results.slice(Math.max(results.length - 6, 1)).reverse()
       let templateVars = {
+        id: req.session.user_id,
         maps: results
       }
-      // res.json(results)
-    console.log(results);
-    res.render("index", templateVars);
+      console.log(results);
+      res.render("index", templateVars);
     });
 });
 

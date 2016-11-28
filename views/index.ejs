@@ -12,9 +12,8 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-left">
-				<li class="clr1 active"><a href="index.html">Favourite Maps</a></li>
-				<li class="clr2"><a href="about.html">Contributed Maps</a></li>
-				<li class="clr3"><a href="courses.html">All My Maps</a></li>
+				<li class="clr1 active"><a href="index.html">All My Maps</a></li>
+				<li class="clr3"><a href="courses.html">Favourite Maps</a></li>
 				<li class="clr4 dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown">Create a map<span class="caret"></span></a>
 						<ul class="dropdown-menu" style="padding: 20px 10px 5px 10px; width:300px;">
@@ -43,16 +42,17 @@
 </div>
 
 
+
 <% maps.forEach(function (map) {  %>
 <div class="MyMapsUser">
+    <label for="description">Map Name:</label>
   <p><%=map.title %></p>
   <label for="description">Description:</label>
   <p><%=map.info %></p>
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&key=AIzaSyAp4PkaVG6Iy1hxCMrhGz1I7bQk3ZsQCFk"/>
+  <p><a href="/api/maps"><img src="https://maps.googleapis.com/maps/api/staticmap?center=43.6532,-79.3832&zoom=12&size=400x400&key=AIzaSyAp4PkaVG6Iy1hxCMrhGz1I7bQk3ZsQCFk"/>
+  </a></p>
 </div>
 <% }) %>
-
-<!-- https://lh6.googleusercontent.com/4GnfwCgCuB3v6A-dzuKzSgOwIrCSJU8d_F7iQyefZiflw-SP5hEnKkoXG0iRlJWWt8AL0kIGABuh=s220 -->
 
 
 
