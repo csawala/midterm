@@ -1,3 +1,4 @@
+
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
   #map {
@@ -54,6 +55,7 @@
     width: 25em;
     bottom: 10em;
     left: 80em  }
+
 
     .mapInformation {
       margin-top: 0.5em;

@@ -18,7 +18,7 @@ module.exports = (knex) => {
 
   router.get("/", (req, res) => {
     const templateVars = {
-      title: req.query.title,
+      title: req.params.title,
       info: req.query.info,
       MAP_API: process.env.MAP_API,
       FILESTACK_API: process.env.FILESTACK_API

@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Map</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/styles/map.css" type="text/css"/>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/map.js"></script>
-    <!-- <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script> -->
-    <!-- <script type="text/javascript" src="/scripts/marker-form.js"></script> -->
-    <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
 
 
-
-  </head>
-  <body>
     <div id="get-to-address">
       <input id="location" type="textbox" value="Toronto, ON">
       <input id="locate" type="button" value="Get me there!">
     </div>
 
-  <div id="map"> </div>
 
+  <div id="map"> </div>
 
   <div id="myMapForm">
     <div id="container-form" class="container">
@@ -69,6 +54,10 @@ onchange="alert(event.fpfile.url)">
               <div>
                 </div>
               <input class="btn btn-lg btn-success btn-block" type="submit" value="SAVE">
+                <div>
+                  <br>
+                  <p>Take me back to my <a href="/">my dashboard</a></p>
+               </div>
             </fieldset>
               </form>
           </div>
@@ -81,9 +70,3 @@ onchange="alert(event.fpfile.url)">
 
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=`${MAP_API}`%>&callback=initMap"></script>
-
-
-
-
-  </body>
-</html>
