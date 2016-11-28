@@ -15,10 +15,6 @@ function initMap() {
   const geocoder = new google.maps.Geocoder();
 
 
-  // $('#location').on('click', function() {
-  //   geocodeAddress(geocoder, map);
-  // });
-
   $('#locate').on('click', function() {
     getToAddress(geocoder, map);
   });
@@ -89,20 +85,6 @@ const onClickMarker = () => {
   onClickMarker()
 
 
-
-
-  // const markerForm = (map) => {
-
-  //   google.maps.event.addListener(map, 'click', function(event) {
-  //   map.setCenter(event.latLng)
-
-  //   let latitude = event.latLng.lat();
-  //   let longitude = event.latLng.lng();
-
-  //   $(".marker-form #adress").html(latitude)
-  // }
-  // markerForm(map)
-
   function markerWindow (markers) {
     markers.forEach(function (marker) {
       if (markers.length === 0) {
@@ -135,10 +117,6 @@ const onClickMarker = () => {
     });
     })
   }
-
-//   google.maps.event.addListener(map, 'click', function(event) {
-//     placeMarker(event.latLng);
-// });
 
 
 ///beyond this point, everything is out of the mapinit functio//
@@ -178,17 +156,17 @@ const saveMarker = () => {
 const getMarkers = () => {
   $.get("/api/maps/markers", function(data) {
     // clearUserMarkers()
-    buildUserMarkers(data)
-    setUserMarkers(map)
+    buildUserMarkers(data);
+    setUserMarkers(map);
   })
 }
 
 const buildUserMarkers = (rawMarkersData) => {
   rawMarkersData.forEach(function(markerData) {
     console.log("raw marker object:", markerData)
-    const location = new google.maps.LatLng({lat: markerData.st_x, lng: markerData.st_y})
-    const title = markerData.title
-    const info = markerData.info
+    const location = new google.maps.LatLng({lat: markerData.st_x, lng: markerData.st_y});
+    const title = markerData.title;
+    const info = markerData.info;
     //description should probably only be used in the window info
     let userMarker = new google.maps.Marker({
           position: location,
@@ -237,9 +215,8 @@ const userMarkersWindow = (marker) => {
           <p></p>
           <footer>
           <form class="delete-form" method="POST" action="/api/maps/marker/delete">
-            <input style="display:none" class="marker-id" name="coordinates" type="text">
-            <input style="display:none" class="marker-id" name="mapId" type="text">
-            <input style="display:none" class="marker-id" name="userId" type="text">
+            <input style="display:none"class="latitude" name="latitude" type="text">
+            <input style="display:none" class="longitude" name="longitude" type="text">
             <button type="submit" name="delete-marker">Delete Marker</button>
           </form>
           </footer>
@@ -248,7 +225,8 @@ const userMarkersWindow = (marker) => {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
         // const markerId = {}
-        $("#content .marker-id").val(title)
+        $(".delete-form .latitude").val(latitude);
+        $(".delete-form .longitude").val(longitude);
         // deleteMarker(marker, $("#delete-button"));
         // Center of map
       map.panTo(new google.maps.LatLng(latitude,longitude));
@@ -257,18 +235,6 @@ const userMarkersWindow = (marker) => {
 // })
 }
 
-// const deleteMarker = function (marker, button) {
-//   console.log("delete marker entered")
-//   console.log("the button element:", button)
-//   button.on("submit", function(event) {
-//     console.log("delete button ajax activated")
-//     $.ajax({
-//       url: "/api/maps/marker/delete",
-//       method: "PUT",
-//       data: marker.title
-//     }).then(console.log("marker deleted"))
-//   })
-// }
 
 
 getMarkers()
@@ -292,30 +258,3 @@ function getToAddress(geocoder, resultsMap) {
     }
   })
 }
-
-// function geocodeAddress(geocoder, resultsMap) {
-//   var address = $('#address').val();
-//   geocoder.geocode({'address': address}, function(results, status) {
-//     if (status === 'OK') {
-//       resultsMap.setCenter(results[0].geometry.location);
-//       // var marker = new google.maps.Marker({
-//       //   map: resultsMap,
-//       //   position: results[0].geometry.location
-//       // });
-//       const coordinates = { lat: results[0].geometry.location.lat(),
-//         lng: results[0].geometry.location.lng()}
-//       $.ajax({
-//         url: "/api/maps/map",
-//         method: "POST",
-//         data: coordinates,
-//         success: () => {
-//           console.log("Ajax came thru")},
-//         error: (err) => {
-//           console.log("this is the error:", err)
-//         }
-//       })
-//     } else {
-//       alert('Geocode was not successful for the following reason: ' + status);
-//     }
-//   });
-// }
