@@ -111,10 +111,10 @@ module.exports = (knex) => {
 
   router.post("/marker/delete", (req, res) => {
     // delete selected marker point
-    const {latitude, longitude} = req.body
+    const {latitude, longitude, loc} = req.body
     const {user_id, map_id} = req.session
 
-    console.log("cookies map_id:", req.session.map_id)
+    console.log("the loc from the marker:", loc)
 
 
     // delete selected marker point
@@ -133,7 +133,7 @@ module.exports = (knex) => {
     .then(() => {     // simply prints out the updated list of points
       knex.select('*', st.asText('loc')).from('points')
       .then((results) => {
-        console.log(results)
+        // console.log(results)
       })
     })                // can comment out above `.then` section [from previous comment]
     .then(() => {
