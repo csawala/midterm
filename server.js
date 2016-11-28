@@ -55,22 +55,24 @@ app.use("/api/users", usersRoutes(knex));
 app.use("/api/maps", mapsRoutes(knex));
 
 
-app.get("/", (req, res) => {
-  uId = req.body.user_id    // cookie user id
 
-  knex('maps')
-  .join('usermaps', uId = 'usermaps.userid')   // table, match1 = match2
-  .select('*')
-  .then((results) => {
+
+
+
+app.get("/", (req, res) => {
+  knex.select("*")
+     .from("maps")
+     .join('users', 'users.id', 'maps.id')
+     .then((results) => {
       results = results.slice(Math.max(results.length - 6, 1)).reverse()
       let templateVars = {
+        id: req.session.user_id,
         maps: results
       }
       console.log(results);
       res.render("index", templateVars);
     });
 });
-
 
 
 
